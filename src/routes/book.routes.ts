@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { ServerRoute } from '@hapi/hapi';
+import { getBookById } from '../controllers/book.controller';
 
 const GOOGLE_BOOKS_API_URL = 'https://www.googleapis.com/books/v1/volumes';
 
@@ -7,7 +8,7 @@ const bookRoutes: ServerRoute[] = [
   {
     method: 'GET',
     path: '/books',
-    options: { auth: false }, // öppen för alla
+    options: { auth: false },
     handler: async (request, h) => {
       const query = request.query.q as string;
 
@@ -41,6 +42,12 @@ const bookRoutes: ServerRoute[] = [
         return h.response({ message: 'Kunde inte hämta böcker' }).code(500);
       }
     },
+  },
+  {
+    method: 'GET',
+    path: '/books/{id}',
+    options: { auth: false },
+    handler: getBookById,
   },
 ];
 
