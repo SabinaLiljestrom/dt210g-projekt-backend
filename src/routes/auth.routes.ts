@@ -9,6 +9,13 @@ const authRoutes: ServerRoute[] = [
     handler: register,
   },
   {
+    method: 'GET',
+    path: '/profile',
+    handler: (request, h) => {
+      const user = request.auth.credentials;
+      return h.response({ message: `Inloggad som ${user.id}` });
+    },},  
+  {
     method: 'POST',
     path: '/login',
     options: { auth: false },
