@@ -5,13 +5,33 @@ const reviewRoutes: ServerRoute[] = [
   {
     method: 'POST',
     path: '/reviews',
-    options: { auth: 'jwt' },
+    options: {
+      auth: 'jwt', // Endast inloggade får posta
+    },
     handler: reviewController.createReview,
+  },
+  {
+    method: 'PUT',
+    path: '/reviews/{id}',
+    options: {
+      auth: 'jwt', // Endast inloggade får uppdatera
+    },
+    handler: reviewController.updateReview,
+  },
+  {
+    method: 'DELETE',
+    path: '/reviews/{id}',
+    options: {
+      auth: 'jwt', // Endast inloggade får ta bort
+    },
+    handler: reviewController.deleteReview,
   },
   {
     method: 'GET',
     path: '/reviews/{bookId}',
-    options: { auth: false }, // Öppen för alla att läsa
+    options: {
+      auth: false, // Öppen för alla att läsa
+    },
     handler: reviewController.getReviewsByBookId,
   },
 ];
