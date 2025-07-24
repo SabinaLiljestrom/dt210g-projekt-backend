@@ -33,7 +33,19 @@ const reviewRoutes: ServerRoute[] = [
       auth: false, // Öppen för alla att läsa
     },
     handler: reviewController.getReviewsByBookId,
+  },{
+    method: 'GET',
+    path: '/reviews',
+    options: { auth: false }, // Öppen för alla
+    handler: reviewController.getAllReviews,
   },
+  {
+    method: 'GET',
+    path: '/my-reviews',
+    options: { auth: 'jwt' }, // Endast inloggad användare
+    handler: reviewController.getMyReviews,
+  },
+  
 ];
 
 export default reviewRoutes;
