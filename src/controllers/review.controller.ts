@@ -9,6 +9,24 @@ export const createReview = async (request: Request, h: ResponseToolkit) => {
       rating: number;
     };
 
+       // Enkel manuell validering
+       if (!bookId || typeof bookId !== 'string') {
+        return h.response({ message: 'Ogiltigt eller saknat bok-ID' }).code(400);
+      }
+  
+      if (!content || typeof content !== 'string' || content.trim().length === 0) {
+        return h.response({ message: 'Recensionstexten får inte vara tom' }).code(400);
+      }
+  
+      if (
+        typeof rating !== 'number' ||
+        !Number.isInteger(rating) ||
+        rating < 1 ||
+        rating > 5
+      ) {
+        return h.response({ message: 'Betyget måste vara ett heltal mellan 1 och 5' }).code(400);
+      }
+
     const userId = (request.auth.credentials as any).id;
 
     const review = new Review({
@@ -42,7 +60,21 @@ export const updateReview = async (request: Request, h: ResponseToolkit) => {
     const { id } = request.params;
     const { content, rating } = request.payload as { content: string; rating: number };
     const userId = (request.auth.credentials as any).id;
-  
+    
+  // Validering
+  if (!content || typeof content !== 'string' || content.trim().length === 0) {
+    return h.response({ message: 'Recensionstexten får inte vara tom' }).code(400);
+  }
+
+  if (
+    typeof rating !== 'number' ||
+    !Number.isInteger(rating) ||
+    rating < 1 ||
+    rating > 5
+  ) {
+    return h.response({ message: 'Betyget måste vara ett heltal mellan 1 och 5' }).code(400);
+  }
+
     try {
       const review = await Review.findById(id);
   
