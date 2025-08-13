@@ -1,5 +1,6 @@
 import { Request, ResponseToolkit } from '@hapi/hapi';
 import Review from '../models/review.model';
+import axios from 'axios';
 
 export const createReview = async (request: Request, h: ResponseToolkit) => {
   try {
@@ -29,9 +30,20 @@ export const createReview = async (request: Request, h: ResponseToolkit) => {
 
     const userId = (request.auth.credentials as any).id;
 
+    // Hämta titel/thumbnail från Google Books
+    const { data } = await axios.get(
+      `https://www.googleapis.com/books/v1/volumes/${bookId}`,
+      { params: { key: process.env.GOOGLE_API_KEY } }
+    );
+    const v = data?.volumeInfo || {};
+    const bookTitle = v.title ?? 'Okänd titel';
+    const bookThumbnail = v.imageLinks?.thumbnail ?? null;
+
     const review = new Review({
       bookId,
       userId,
+      bookTitle,      
+      bookThumbnail,  
       content,
       rating,
     });

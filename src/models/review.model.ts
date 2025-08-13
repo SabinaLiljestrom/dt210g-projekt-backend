@@ -2,6 +2,8 @@ import mongoose from 'mongoose';
 
 const reviewSchema = new mongoose.Schema({
   bookId: { type: String, required: true },
+  bookTitle: { type: String, required: true },
+  bookThumbnail: { type: String, default: null },
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   content: {   type: String, required: true, trim: true, minlength: 1, },
   rating: { type: Number, required: true, min: 1, max: 5, },
