@@ -16,8 +16,11 @@ const init = async () => {
     routes: {
       cors: {
         origin: ['*'],
+        headers: ['Accept', 'Content-Type', 'Authorization'], 
+        additionalHeaders: ['Access-Control-Allow-Origin'],
+        credentials: true,
       },
-    },
+    },    
   });
 
   // Anslut till MongoDB
