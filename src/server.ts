@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import Hapi from '@hapi/hapi';
 import mongoose from 'mongoose';
 
-// Importera routes (lägg till .ts om det behövs)
+// Importera routes
 import authRoutes from './routes/auth.routes';
 import bookRoutes from './routes/book.routes';
 import reviewRoutes from './routes/review.routes';
@@ -39,7 +39,7 @@ const init = async () => {
   server.auth.strategy('jwt', 'jwt', {
     key: process.env.JWT_SECRET_KEY!,
     validate: async (decoded: any, request: Hapi.Request, h: Hapi.ResponseToolkit) => {
-      // Lägg gärna till validering här senare (t.ex. kontrollera användar-ID)
+    
       return { isValid: true, credentials: decoded };
     },
     verifyOptions: { algorithms: ['HS256'] },
