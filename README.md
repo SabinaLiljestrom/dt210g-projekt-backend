@@ -62,3 +62,7 @@ npm start
 | `POST`   | `/reviews`          | Skapa en ny recension                    | ✅ Ja   | `body: { bookId, content, rating }`- |
 | `PUT`    | `/reviews/{id}`     | Uppdatera ett befintlig recension        | ✅ Ja   | `/reviews/665dabc12345abcd6789efgh`  |
 | `DELETE` | `/reviews/{id}`     | Radera en recension                      | ✅ Ja   | `/reviews/665dabc12345abcd6789efgh`  |
+
+#### Skapad av
+
+Sabina Liljeström i kursen dt210g – Fördjupad frontend-utveckling vid Mittuniversitetet.
