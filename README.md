@@ -28,10 +28,10 @@ git clone https://github.com/SabinaLiljestrom/dt210g-projekt-backend
    JWT_SECRET_KEY=<valfri-hemlig-nyckel>
 
 4. **Starta servern:**
-   # Utveckling
+   ### Utveckling
    npm run dev
 
-# Produktion
+### Produktion
 
 npm start
 
